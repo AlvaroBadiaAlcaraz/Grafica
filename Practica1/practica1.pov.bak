@@ -1,4 +1,4 @@
- 
+//+w456 +h573 
 
 // PoVRay 3.7 Scene File " ... .pov"
 // author:  ...

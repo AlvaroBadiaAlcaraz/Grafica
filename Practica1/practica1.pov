@@ -24,21 +24,26 @@ global_settings{ assumed_gamma 1.0 }
 // camera ------------------------------------------------------------------
 
 camera {
-  location  <0.0, 20, -50>
-  look_at   <0.0, 25.0, 400.0>
+  location  <0.0, 23, -50>
+  look_at   <0.0, 0, 2.5>
   right     x*image_width/image_height   
 }
 
-// sky ----------------------------------------------------------------------
-sky_sphere { pigment { color rgb<78, 239, 110>/255 } // end of pigment
-           } //end of skysphere           
+         
 // ground -------------------------------------------------------------------
 plane{ <0,1,0>, 0 
-       texture{ pigment{ color rgb<255, 250, 250> }
+       texture{ pigment{ color rgb<0.85, 0.85, 0.85> }
               } // end of texture        
-       translate<0, 0, 0>          
+         
        
-     } // end of plane
+     } // end of plane        
+     
+plane{ <0,0,1>, 1 
+       texture{ pigment{ color rgb<0.5, 0.8, 0.2> }
+              } // end of texture        
+     
+       
+     } // end of plane     
                             
 sphere { <0,0,0>, 0.5 
 
@@ -49,13 +54,13 @@ sphere { <0,0,0>, 0.5
           scale<1,1,1>  rotate<0,0,0>  translate<0,0,0>  
        }  // end of sphere ----------------------------------- 
 
-cylinder { <0,26.5,0>,<0,2.00,0>, 5 
+cylinder { <0,17,0>,<0,2.00,0>, 3.5 
 
           texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4 } // 
                 // normal { bumps 0.5 scale 0.05 }
                  //  finish { phong 1 reflection 0.00}
                  } // end of texture 
 
-           scale <1,1,1> rotate<0,0,0> translate<7,5,0>
+           scale <1,1,1> rotate<0,0,0> translate<4.5,0,-20>
          } // end of cylinder -------------------------------------
 
