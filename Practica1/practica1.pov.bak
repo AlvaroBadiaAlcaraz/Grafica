@@ -24,11 +24,17 @@ global_settings{ assumed_gamma 1.0 }
 // camera ------------------------------------------------------------------
 
 camera {
-  location  <0.0, 23, -50>
+  location  <0.0, 18, -50>
   look_at   <0.0, 0, 2.5>
   right     x*image_width/image_height   
 }
 
+// create a regular point light source
+light_source {
+  0*x                  // light's position (translated below)
+  color rgb <1,1,1>    // light's color
+  translate <20, 40, -40>
+}
          
 // ground -------------------------------------------------------------------
 plane{ <0,1,0>, 0 
@@ -54,13 +60,91 @@ sphere { <0,0,0>, 0.5
           scale<1,1,1>  rotate<0,0,0>  translate<0,0,0>  
        }  // end of sphere ----------------------------------- 
 
-cylinder { <0,17,0>,<0,2.00,0>, 3.5 
 
-          texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4 } // 
+
+        //   scale <1,1,1> rotate<10,0,1> translate<4.5,-2.2,-22.5>
+        // } // end of cylinder -------------------------------------
+
+
+
+#declare vaso_agua = 
+union{
+    difference{
+        cylinder { <0,17.2,0>,<0,2.00,0>, 3 
+            material{   //-----------------------------------------------------------
+                texture { pigment{ rgbf <0.98, 0.98, 0.98, 0.9> }
+                          finish { diffuse 0.1 reflection 0.2  
+                                  specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+                } // end of texture -------------------------------------------
+                interior{ ior 1.5 caustics 0.5
+                } // end of interior ------------------------------------------
+                
+            } // end of material ----------------------------------------------------
+            scale <1,1,1> rotate<10,0,1> translate<4.5,-2.2,-22.5>
+        }
+            
+        cylinder { <0,17.3,0>,<0,2.00,0>, 1.8    
+            material{   //-----------------------------------------------------------
+                texture { pigment{ rgbf <0.98, 0.98, 0.98, 0.9> }
+                          finish { diffuse 0.1 reflection 0.2  
+                                  specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+                } // end of texture -------------------------------------------
+                interior{ ior 1.5 caustics 0.5
+                } // end of interior ------------------------------------------
+                
+            } // end of material ----------------------------------------------------
+            scale <1,1,1> rotate<10,0,1> translate<4.5,-0.5,-22.5>
+        } //fin cilindro
+                       
+    }//fin diferencia
+
+    cylinder { <0,0,0>,<0,5,0>, 2    
+            material{   //-----------------------------------------------------------
+                texture { pigment{ rgbf <0.98, 0.98, 0.99, 0.7> }
+                          finish { diffuse 0.1 reflection 0.2  
+                                  specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+                } // end of texture -------------------------------------------
+                interior{ ior 1.5 caustics 0.5
+                } // end of interior ------------------------------------------
+                
+            } // end of material ----------------------------------------------------  
+    scale <1,1,1> rotate<10,0,1> translate<4.4,1.8,-22.5>
+            
+    }
+
+}
+
+object{vaso_agua /*translate<4.5,-2.2,-22.5>*/}      
+
+cylinder { <4,1.5,-22.5>,<6.5,21.3,-20>, 0.30 
+
+           texture { pigment{ color rgb< 1, 1, 1>*0.00 } //  color Black
                 // normal { bumps 0.5 scale 0.05 }
-                 //  finish { phong 1 reflection 0.00}
+                   finish { phong 1 }
                  } // end of texture 
 
-           scale <1,1,1> rotate<0,0,0> translate<4.5,0,-20>
-         } // end of cylinder -------------------------------------
-
+           
+         } // end of cylinder -------------------------------------   
+      
+      
+            
+      //------------------------------------------------------------------------------ 
+#include "shapes3.inc"                                                        
+//------------------------------------------------------------------------------
+object{ Round_Cylinder_Tube( <-1,-0.2,-0.2>, // starting point
+                             <1.0,0.9,-0.3>, // end point
+                             0.85, // major radius
+                             0.12, // minor radius (borders)
+                             1,  //  1 = filled; 0 = open tube 
+                             1 // 0 = union, 1 = merge for transparent materials 
+                           ) //-------------------------------------------------
+        texture{ pigment{ color rgb<1,1,1> } 
+              // normal { bumps 0.5 scale 0.005 } 
+                 finish { phong 1}                               
+               } // end texture
+        scale <1,1,1> 
+        rotate<0,0,0> 
+        translate<0,0,0>
+      } // end of object ------------------------------------------------------- 
+//------------------------------------------------------------------------------
+   
