@@ -19,7 +19,9 @@ global_settings{ assumed_gamma 1.0 }
 #include "shapes2.inc"
 #include "functions.inc"
 #include "math.inc"
-#include "transforms.inc"
+#include "transforms.inc"  
+#include "shapes3.inc"  
+#include "shapes.inc" 
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
 
@@ -127,24 +129,55 @@ cylinder { <4,1.5,-22.5>,<6.5,21.3,-20>, 0.30
          } // end of cylinder -------------------------------------   
       
       
+
+#declare taza=
+union{
+    difference{
+        object{ Round_Cylinder_Tube( <0,0,0>, // starting point
+                                 <0,9,0>, // end point
+                                 3.8, // major radius
+                                 0.12, // minor radius (borders)
+                                 1,  //  1 = filled; 0 = open tube 
+                                 1 // 0 = union, 1 = merge for transparent materials 
+                               ) //-------------------------------------------------
+            scale <1,1,1> 
             
-      //------------------------------------------------------------------------------ 
-#include "shapes3.inc"                                                        
-//------------------------------------------------------------------------------
-object{ Round_Cylinder_Tube( <-1,-0.2,-0.2>, // starting point
-                             <1.0,0.9,-0.3>, // end point
-                             0.85, // major radius
-                             0.12, // minor radius (borders)
-                             1,  //  1 = filled; 0 = open tube 
-                             1 // 0 = union, 1 = merge for transparent materials 
-                           ) //-------------------------------------------------
-        texture{ pigment{ color rgb<1,1,1> } 
-              // normal { bumps 0.5 scale 0.005 } 
-                 finish { phong 1}                               
-               } // end texture
+         } // end of object
+          
+         object{ Round_Cylinder_Tube( <0,0,0>, // starting point
+                                 <0,9.1,0>, // end point
+                                 3.6, // major radius
+                                 0.12, // minor radius (borders)
+                                 1,  //  1 = filled; 0 = open tube 
+                                 1 // 0 = union, 1 = merge for transparent materials 
+                               ) //-------------------------------------------------
+            scale <1,1,1> 
+            
+         } // end of object 
+          
+    }
+    object{ Supertorus( 3.7, 0.1, // Radius_Major, Radius_Minor, 
+                    1.00, 1, // Major_Control, Minor_Control,
+                   0.001, 1.50) // Accuracy, Max_Gradient)      
         scale <1,1,1> 
-        rotate<0,0,0> 
-        translate<0,0,0>
-      } // end of object ------------------------------------------------------- 
-//------------------------------------------------------------------------------
-   
+        translate<0,8.93,0>
+    } //---------------------------------------------------- 
+      
+      
+      
+      
+
+    texture{ pigment{ color rgb<1,1,1> } 
+                  // normal { bumps 0.5 scale 0.005 } 
+                     finish { phong 1}                               
+                   } // end texture
+        
+
+}  
+
+
+object{taza translate<-2.3, -2.9, -24.5>
+            rotate<5.8,0,0>
+      }
+
+            
