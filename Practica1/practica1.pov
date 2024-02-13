@@ -85,7 +85,7 @@ union{
                        
     }//fin diferencia
 
-    cylinder { <0,0,0>,<0,5,0>, 2    
+    cylinder { <0,0,0>,<0,5,0>, 2.2    
             material{   //-----------------------------------------------------------
                 texture { pigment{ rgbf <0.98, 0.98, 0.99, 0.7> }
                           finish { diffuse 0.1 reflection 0.2  
@@ -264,7 +264,7 @@ object{taza translate<-5.6, -2.9, -24.5>
 
 object{vaso_agua translate<-0.9,0,0>}            
                  
-object{pajita translate<2.8,1.5,-22>
+object{pajita translate<2.8,1.5,-21>
               rotate<0,0,-7>}  
               
 object{prisma rotate<-15,30,0>
