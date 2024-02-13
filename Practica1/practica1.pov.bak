@@ -219,7 +219,14 @@ difference{
 
 
 }  
+     
+#declare bola=
+sphere { <0,0,0>, 0.5 
+          scale<1,1,1>  rotate<0,0,0>  translate<0,0.5,0>  
+       }  // end of sphere ----------------------------------- 
 
+
+     
 
 object{taza translate<-5.6, -2.9, -24.5>
             rotate<5.8,-5,0>}
@@ -232,3 +239,29 @@ object{pajita translate<2.8,1.5,-22>
 object{prisma rotate<-15,30,0>
               translate<7,0,-29>}
       
+object{bola scale<2.5,2.5,2.5>
+            translate<3.8,0,-28.85>
+            material{ texture { NBwinebottle } // end of texture 
+                      interior{ I_Glass } // end of interior
+                    } // end of material -------------------      
+      }
+      
+object{bola scale<1.5,1.5,1.5>
+            translate<1.6,0,-29>
+            material{ texture { NBwinebottle } // end of texture 
+                      interior{ I_Glass } // end of interior
+                    } // end of material -------------------      
+      }     
+      
+object{bola scale<1.7,1.7,1.7>
+            translate<2,0,-30.8>
+            texture{ Chrome_Metal
+                  // normal { bumps 0.5 scale 0.05 } 
+                  // finish { phong 1 }
+            } // end of texture ---------------------------  
+      
+      } 
+      
+
+
+            

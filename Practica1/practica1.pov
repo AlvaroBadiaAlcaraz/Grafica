@@ -35,7 +35,7 @@ camera {
 light_source {
   0*x                  // light's position (translated below)
   color rgb <1,1,1>    // light's color
-  translate <20, 40, -40>
+  translate <15, 30, -50>
 }
          
 // ground -------------------------------------------------------------------
@@ -70,7 +70,7 @@ union{
             scale <1,1,1> rotate<10,0,1> translate<4.5,-2.2,-22.5>
         }
             
-        cylinder { <0,17.3,0>,<0,2.00,0>, 1.8    
+        cylinder { <0,17.3,0>,<0,2.00,0>, 2    
             material{   //-----------------------------------------------------------
                 texture { pigment{ rgbf <0.98, 0.98, 0.98, 0.9> }
                           finish { diffuse 0.1 reflection 0.2  
@@ -98,6 +98,25 @@ union{
     scale <1,1,1> rotate<10,0,1> translate<4.4,1.8,-22.5>
             
     }
+    object{ Supertorus( 2.9, 0.1, // Radius_Major, Radius_Minor, 
+                    1.00, 0.45, // Major_Control, Minor_Control,
+                   0.001, 1.50) // Accuracy, Max_Gradient)
+        
+        material{   //-----------------------------------------------------------
+                texture { pigment{ rgbf <0.98, 0.98, 0.99, 0.7> }
+                          finish { diffuse 0.1 reflection 0.2  
+                                  specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+                } // end of texture -------------------------------------------
+                interior{ ior 1.5 caustics 0.5
+                } // end of interior ------------------------------------------
+                
+            } // end of material ----------------------------------------------------
+        scale <1,1,1> 
+        rotate<10,0,1> 
+        translate<4.18,14.68,-20> 
+        
+      } //----------------------------------------------------  
+      no_shadow
 
 }
      
@@ -117,9 +136,11 @@ union{
     texture { pigment{ color rgb< 1, 1, 1>*0.00 } //  color Black
             // normal { bumps 0.5 scale 0.05 }
                finish { phong 1 }
-             } // end of texture
+             } // end of texture  
+    no_shadow
 }
    
+     
 
 #declare taza=
 merge{
@@ -191,7 +212,7 @@ difference{
     // linear prism in y-direction: from .. ,to ..,number of points (first = last)
     prism { 0.00 ,7.50 , 4
        <-1.50, 0.00>, // first point
-       < 2.00, 0.00>, 
+       < 1.50, 0.00>, 
        < 0.00,-2.50>,
        <-1.50, 0.00>  // last point = first point !!!
 
@@ -213,8 +234,18 @@ difference{
                 finish { phong 1 reflection{ 0.00 metallic 0.00} } 
               } // end of texture
 
-      scale <1,1,1> rotate<-10,0,0> translate<0,1,0> 
+      scale <1,1,1> rotate<-20,0,0> translate<0,1,0>  
+    } // end of box -------------------------------------- 
+    box { <-0.30, 0.00, -2.00>,< 0.50, 8.00, -3.00>   
+
+      texture { pigment{ color rgb<1.00, 1.00, 1.00>}  
+                finish { phong 1 reflection{ 0.00 metallic 0.00} }  
+                
+              } // end of texture
+
+      scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
     } // end of box --------------------------------------
+
 
 
 
@@ -261,7 +292,3 @@ object{bola scale<1.7,1.7,1.7>
             } // end of texture ---------------------------  
       
       } 
-      
-
-
-            
