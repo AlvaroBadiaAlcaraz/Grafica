@@ -200,6 +200,24 @@ merge{
     
     }
     
+    /*intersection {
+    torus { 2,0.3 
+        
+        scale <1,1,1> rotate<90,0,0> 
+      } // end of torus  -------------------------------
+    torus { 1.8,0.3 
+      
+        scale <1,1,1> rotate<90,0,0> 
+      } // end of torus  -------------------------------              
+              
+  
+      
+    scale <1.21,1.75,1> 
+    translate<-4.52,4.8,-1.5> 
+    rotate<0,0,0>               
+    
+    }*/
+    
     texture{ pigment{ color rgb<1,1,1> } 
                   // normal { bumps 0.5 scale 0.005 } 
                      finish { phong 1}                               
@@ -292,3 +310,6 @@ object{bola scale<1.7,1.7,1.7>
             } // end of texture ---------------------------  
       
       } 
+
+
+
