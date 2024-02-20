@@ -35,7 +35,7 @@ camera {
 light_source {
   0*x                  // light's position (translated below)
   color rgb <1,1,1>    // light's color
-  translate <15, 30, -50>
+  translate <15, 25, -50>
 }
          
 // ground -------------------------------------------------------------------
@@ -44,7 +44,7 @@ plane{ <0,1,0>, 0
               } // end of texture        
          
        
-     } // end of plane        
+     } // end of plane       
      
 plane{ <0,0,1>, 1 
        texture{ pigment{ color rgb<0.5, 0.8, 0.2> }
@@ -199,24 +199,7 @@ merge{
         rotate<0,0,0>
     
     }
-    
-    /*intersection {
-    torus { 2,0.3 
-        
-        scale <1,1,1> rotate<90,0,0> 
-      } // end of torus  -------------------------------
-    torus { 1.8,0.3 
-      
-        scale <1,1,1> rotate<90,0,0> 
-      } // end of torus  -------------------------------              
-              
-  
-      
-    scale <1.21,1.75,1> 
-    translate<-4.52,4.8,-1.5> 
-    rotate<0,0,0>               
-    
-    }*/
+          
     
     texture{ pigment{ color rgb<1,1,1> } 
                   // normal { bumps 0.5 scale 0.005 } 
@@ -252,9 +235,9 @@ difference{
                 finish { phong 1 reflection{ 0.00 metallic 0.00} } 
               } // end of texture
 
-      scale <1,1,1> rotate<-20,0,0> translate<0,1,0>  
+      scale <1,1,1> rotate<-20,0,0> translate<0,1.17,0>  
     } // end of box -------------------------------------- 
-    box { <-0.30, 0.00, -2.00>,< 0.50, 8.00, -3.00>   
+    box { <-0.30, 0.00, -2.30>,< 0.50, 8.00, -3.00>   
 
       texture { pigment{ color rgb<1.00, 1.00, 1.00>}  
                 finish { phong 1 reflection{ 0.00 metallic 0.00} }  
@@ -263,8 +246,6 @@ difference{
 
       scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
     } // end of box --------------------------------------
-
-
 
 
 }  
