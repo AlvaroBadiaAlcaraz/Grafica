@@ -12,7 +12,10 @@ triangle {< -C,C,-C >,<-C,-C,C>,<C,C,C> texture {Mirror}}
 triangle {< -C,C,-C >,<C,C,C>,<C,-C,-C> texture {Mirror}}
 triangle {< -C,C,-C >,<C,-C,-C>,<-C,-C,C> texture {Mirror}}
 triangle {< C,-C,-C >,<C,C,C>,<-C,-C,C> texture {Mirror}}   
-*/
+*/ 
+
+global_settings {max_trace_level 18}
+
 // perspective (default) camera
 camera {
   location  <0.0, 2.0, -5.0>
@@ -23,8 +26,20 @@ camera {
 // create a regular point light source
 light_source {
   0*x                  // light's position (translated below)
-  color rgb <.2,.2,.2>    // light's color
-  translate <0,2.5,-5>
+  color rgb <.2,0,0>    // light's color
+  translate <0,0,-5>
+}
+
+light_source {
+  0*x                  // light's position (translated below)
+  color rgb <0,.2,0>    // light's color
+  translate <2,0,-5>
+}
+
+light_source {
+  0*x                  // light's position (translated below)
+  color rgb <0,0,.2>    // light's color
+  translate <-2,0,-5>
 }
 
 
