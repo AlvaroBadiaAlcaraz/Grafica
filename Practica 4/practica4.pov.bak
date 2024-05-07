@@ -1,5 +1,5 @@
 //+w456 +h573 
-
+ 
 // PoVRay 3.7 Scene File " ... .pov"
 // author:  ...
 // date:    ...
@@ -30,13 +30,49 @@ camera {
   look_at   <0.0, 0, 2.5>
   right     x*image_width/image_height   
 }
+    
 
-// create a regular point light source
-light_source {
-  0*x                  // light's position (translated below)
-  color rgb <1,1,1>    // light's color
-  translate <15, 25, -50>
+    
+#default{ finish{ ambient 0 diffuse 1 }} 
+
+global_settings {
+  radiosity {
+    pretrace_start 0.08           // start pretrace at this size
+    pretrace_end   0.04           // end pretrace at this size
+    count 50                      // higher -> higher quality (1..1600) [35]
+
+    nearest_count 5               // higher -> higher quality (1..10) [5]
+    error_bound 1.8               // higher -> smoother, less accurate [1.8]
+    recursion_limit 3             // how much interreflections are calculated (1..5+) [3]
+
+    low_error_factor .5           // reduce error_bound during last pretrace step
+    gray_threshold 0.0           // increase for weakening colors (0..1) [0]
+    minimum_reuse 0.001         // reuse of old radiosity samples [0.015]
+    brightness 0.3                  // brightness of radiosity effects (0..1) [1]
+
+    adc_bailout 0.01/2
+
+  }
+  
 }
+
+// An area light (creates soft shadows)
+// WARNING: This special light can significantly slow down rendering times!
+light_source {
+  <0,0,0>             // light's position (translated below)
+  color rgb 1.0       // light's color
+  area_light
+  <8, 0, 0> <0, 0, 8> // lights spread out across this distance (x * z)
+  4, 4                // total number of lights in grid (4x*4z = 16 lights)
+  //adaptive 0          // 0,1,2,3...
+  //jitter              // adds random softening of light
+  //circular            // make the shape of the light circular
+  //orient              // orient light     
+  fade_distance 40
+  fade_power 4
+  translate <21, 21, -50>    // <x y z> position of light
+}
+
          
 // ground -------------------------------------------------------------------
 plane{ <0,1,0>, 0 
@@ -91,11 +127,12 @@ union{
                           finish { diffuse 0.1 reflection 0.2  
                                   specular 0.8 roughness 0.0003 phong 1 phong_size 400}
                 } // end of texture -------------------------------------------
-                interior{ ior 1.5 caustics 0.5
+                interior{ ior 0 caustics 0.5
                 } // end of interior ------------------------------------------
                 
             } // end of material ----------------------------------------------------  
-    scale <1,1,1> rotate<10,0,1> translate<4.4,1.8,-22.5>
+    scale <1,1,1> rotate<10,0,1> translate<4.4,1.8,-22.5>   
+    
             
     }
     object{ Supertorus( 2.9, 0.1, // Radius_Major, Radius_Minor, 
@@ -139,8 +176,7 @@ union{
              } // end of texture  
     no_shadow
 }
-   
-     
+                     
 
 #declare taza=
 merge{
@@ -152,6 +188,16 @@ merge{
                                  1,  //  1 = filled; 0 = open tube 
                                  1 // 0 = union, 1 = merge for transparent materials 
                                ) //-------------------------------------------------
+            texture{ pigment{ image_map{
+                    jpeg "beatles.jpg" map_type 0
+                    
+                   } rotate<0,0,0>   scale <13.5,10,10>  translate <-5.8,-0.5,0>
+                   
+                   } 
+                   finish { diffuse 0.7 reflection 0.3  
+                                  specular 0.8  phong 1 phong_size 400}
+              
+              } // end of texture
             scale <1,1,1> 
             
          } // end of object
@@ -203,9 +249,10 @@ merge{
     
     texture{ pigment{ color rgb<1,1,1> } 
                   // normal { bumps 0.5 scale 0.005 } 
-                     finish { phong 1}                               
-                   } // end texture
-        
+                       
+                     finish { diffuse 0.7 reflection 0.3  
+                                  specular 0.8  phong 1 phong_size 400}                             
+                   } // end texture        
 }
 
 #declare prisma=
@@ -286,11 +333,13 @@ object{bola scale<1.5,1.5,1.5>
 object{bola scale<1.7,1.7,1.7>
             translate<2,0,-30.8>
             texture{ Chrome_Metal
-                  // normal { bumps 0.5 scale 0.05 } 
-                  // finish { phong 1 }
+                   
+                   finish {specular 0.2 phong 0.3 phong_size 2}
             } // end of texture ---------------------------  
       
       } 
+
+
 
 
 
