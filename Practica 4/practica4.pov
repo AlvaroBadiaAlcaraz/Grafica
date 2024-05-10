@@ -202,13 +202,13 @@ merge{
                                  1,  //  1 = filled; 0 = open tube 
                                  1 // 0 = union, 1 = merge for transparent materials 
                                ) //-------------------------------------------------
-            texture{ pigment{ image_map{
+            texture{  pigment{ image_map{
                     jpeg "beatles.jpg" map_type 0
                     
                    } rotate<0,0,0>   scale <13.5,10,10>  translate <-5.8,-0.5,0>
                    
                    } 
-                    finish { diffuse 0.4 
+                    finish { diffuse 0.5 
                     reflection {  
                         0, 0.4
                         fresnel on
@@ -266,16 +266,16 @@ merge{
     }
           
     
-    texture{ pigment{ color rgb<1,1,1> } 
+    texture{  pigment{ color rgb<1,1,1> } 
                   // normal { bumps 0.5 scale 0.005 } 
                        
-                    finish { diffuse 0.4 
+                    finish { diffuse 0.5 
                     reflection {  
                         0, 0.4
                         fresnel on
                         }
                      
-                    ambient 0.1 specular 0.8  phong 1 phong_size 400}                             
+                    ambient 0.2 specular 0.8  phong 1 phong_size 400}                             
                    } // end texture        
 }
 
@@ -367,8 +367,5 @@ object{bola scale<1.7,1.7,1.7>
               
       
       } 
-
-
-
 
 

@@ -69,9 +69,23 @@ light_source {
   //circular            // make the shape of the light circular
   //orient              // orient light     
   fade_distance 40
-  fade_power 4
-  translate <21, 21, -50>    // <x y z> position of light
+  fade_power 4.5
+  translate <21, 20, -50>    // <x y z> position of light
 }
+
+// create a point "spotlight" (conical directed) light source
+light_source {
+  <0,0,0>                 // light's position (translated below)
+  color rgb <1,1,1>       // light's color
+  spotlight               // this kind of light source
+  translate <40, 20, -80> // <x y z> position of light
+  point_at <20, 0, 0>      // direction of spotlight
+  radius 35                // hotspot (inner, in degrees)
+  tightness 80            // tightness of falloff (1...100) lower is softer, higher is tighter
+  falloff 2               // intensity falloff radius (outer, in degrees)
+}
+
+ 
 
          
 // ground -------------------------------------------------------------------
@@ -83,7 +97,7 @@ plane{ <0,1,0>, 0
      } // end of plane       
      
 plane{ <0,0,1>, 1 
-       texture{ pigment{ color rgb<0.5, 0.8, 0.2> }
+       texture{ pigment{ color rgb<0.65, 0.85, 0.03> }
               } // end of texture        
      
        
@@ -194,8 +208,13 @@ merge{
                    } rotate<0,0,0>   scale <13.5,10,10>  translate <-5.8,-0.5,0>
                    
                    } 
-                   finish { diffuse 0.7 reflection 0.3  
-                                  specular 0.8  phong 1 phong_size 400}
+                    finish { diffuse 0.4 
+                    reflection {  
+                        0, 0.4
+                        fresnel on
+                        }
+                     
+                    ambient 0.2 specular 0.8  phong 1 phong_size 400}
               
               } // end of texture
             scale <1,1,1> 
@@ -250,8 +269,13 @@ merge{
     texture{ pigment{ color rgb<1,1,1> } 
                   // normal { bumps 0.5 scale 0.005 } 
                        
-                     finish { diffuse 0.7 reflection 0.3  
-                                  specular 0.8  phong 1 phong_size 400}                             
+                    finish { diffuse 0.4 
+                    reflection {  
+                        0, 0.4
+                        fresnel on
+                        }
+                     
+                    ambient 0.1 specular 0.8  phong 1 phong_size 400}                             
                    } // end texture        
 }
 
@@ -318,7 +342,9 @@ object{prisma rotate<-15,30,0>
       
 object{bola scale<2.5,2.5,2.5>
             translate<3.8,0,-28.85>
-            material{ texture { NBwinebottle } // end of texture 
+            material{ texture { NBwinebottle   
+              
+                    } // end of texture 
                       interior{ I_Glass } // end of interior
                     } // end of material -------------------      
       }
@@ -333,9 +359,12 @@ object{bola scale<1.5,1.5,1.5>
 object{bola scale<1.7,1.7,1.7>
             translate<2,0,-30.8>
             texture{ Chrome_Metal
+            
+                    pigment{color rgb<0.49, 0.35, 0.23>}
                    
-                   finish {specular 0.2 phong 0.3 phong_size 2}
-            } // end of texture ---------------------------  
+                   finish {ambient 0.1 specular 0 phong 0.5 phong_size 40}
+            } // end of texture ---------------------------
+              
       
       } 
 
