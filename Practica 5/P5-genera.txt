@@ -1,0 +1,20 @@
+Para realizar el fine tunning he hecho uso de un proyecto de github que proporciona una interfaz gráfica para realizar diversos procesos relacionados con el fine tunning basado en stable difusión, como crear Loras o checkpoints.
+
+Para esta práctica he entrenado un Lora, ya que es menos costoso computacionalmente en el entrenamiento, y para lograr los resultados deseados es más que suficiente, ya que un modelo de una persona no es demasiado complejo.
+
+Lo primero que hice, fue elegir unas 10 fotos mías, de buena calidad, en la que se viera mi cara de manera centrada y clara, es decir, fotos sin usar gafas de sol, gorros u otros complementos, ya que dificultarían el proceso de aprendizaje. Una vez seleccionadas las foros les cambié el nombre a los archivos para que estuvieran enumeradas del 1 al 10, esto es importante, ya que el siguiente paso fue crear un archivo de texto (formato .txt) por cada foto con el mismo nombre que l de la foto al que va asociada, por eso las enumeré ya que así era más simple realizar este paso. Estos archivos de texto contenían una descripción de sus imágenes correspondientes, de entre 25 y 75 palabras, esto se hace para que en el proceso de entrenamiento el modelo de stable diffusion identifique las palabras clave de estas descripciones y las asocie con las imágenes correspondientes, además todas las descripciones comenzaban con mi nombre, para que el modelo asociará mi nombre al Lora que se estaba generando.
+
+Finalmente guardé estas imágenes en una carpeta con la siguiente estructura en el nombre “150_AlvaroBadia man”, este nombre es importante ya que en el modelo de entrenamiento que he usado es el nombre de esta carpeta la que determina algunos aspectos del modelo, el número  hace referencia al número de pasos de entrenamiento de cada imagen, teniendo que llegar siempre a un total de 1500, en este caso 10 imágenes por 150; lo siguiente hace referencia a la palabra que será utilizada por el modelo generativo para identificar el Lora; y finalmente la clase de modelo entrenado, en este caso la de un hombre.
+
+Con todo esto hecho hice uso de la interfaz gráfica del proyecto de github y después de 15/20 minutos de entrenamiento me devolvió el Lora con formato .safetensors.
+Finalmente para generar las imágenes hice uso del proyecto de Automatic1111 y su interfaz gráfica.
+
+Para generar las imágenes introduje el siguiente prompt, “A full body masterpiece of a man <lora_AlvaroBadia:1> in his twenties with shaved hair, standing in a jungle, looking at the observer”, un prompt negativo, “deformed eyes. deformed lips, deformed mouth, deformed face, deformed hands”, y los parámetros de generación fueron los siguientes:
+•	Sampling method: DPM++2M Karras
+•	Sampling steps: 60
+•	Width: 1024
+•	Height: 1024
+•	CGF Scale: 7
+•	Batch count: 5
+•	Batch size: 1
+•	Seed: -1
